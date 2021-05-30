@@ -1,4 +1,3 @@
-"""
 import firebase_admin
 import datetime
 from firebase_admin import credentials
@@ -33,4 +32,3 @@ class Firebase:
         firebase_admin.initialize_app(cred, {
             'storageBucket': 'chatapp-5ae13.appspot.com'
         })
-        """

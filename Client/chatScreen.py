@@ -2,15 +2,11 @@ import threading, json
 from tkinter import *
 from tkinter import filedialog, messagebox
 from io import BytesIO
-
 from PIL import ImageTk, Image
 import requests
-import os
-import urllib
-from functools import partial
 
+from firebaseManager import Firebase
 from messages import *
-#from firebaseManager import Firebase
 WINDOW_WIDTH = 700
 
 
@@ -45,8 +41,7 @@ class ChatScreen():
         self.messages.place(x=20, y=60)
         self.scroll.configure(command=self.messages.yview)
         self.msg_entry.place(x=140, y=470)
-        #img_link = Firebase.retrieve_img_from_firebase(self.user.get("username"))
-        img_link = "https://images.pexels.com/photos/3680219/pexels-photo-3680219.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+        img_link = Firebase.retrieve_img_from_firebase(self.user.get("username"))
         response = requests.get(img_link)
         img_data = response.content
         image = Image.open(BytesIO(img_data))

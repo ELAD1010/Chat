@@ -65,7 +65,7 @@ class RegisterScreen:
 
     def exit_on_register_menu(self):
         if messagebox.askokcancel("Quit", "Are you sure you want to quit?"):
-            self.register.destroy()
+            self.destroy()
             exit()
 
     def clear(self):
@@ -78,11 +78,15 @@ class RegisterScreen:
         self.password = self.password_entry.get()
         if self.check_password() and self.check_username():
             if not self.check_user_exists():
+                self.destroy()
                 client = Client(self.user, self.socket)
                 client.start()
             else:
                 messagebox.showerror("Error", "Username already exists")
 
+    def destroy(self):
+        self.register.destroy()
+        self.login_screen.destroy()
 
     def check_user_exists(self):
         self.socket.connect((HOST, PORT))

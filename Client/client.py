@@ -27,14 +27,17 @@ class Client(threading.Thread):
         self.chatScreen = ""
 
     def receive(self):
-        while self.isAlive:
-            data = self.socket.recv(2048).decode()
-            print(data)
-            if data == '':
-                break
-            print(data)
-            msg_dict = json.loads(data)
-            self.check_type(msg_dict, msg_dict.get("msgType"))
+        try:
+            while self.isAlive:
+                data = self.socket.recv(2048).decode()
+                print(data)
+                if data == '':
+                    break
+                print(data)
+                msg_dict = json.loads(data)
+                self.check_type(msg_dict, msg_dict.get("msgType"))
+        except socket.error:
+            print("socket closed")
 
     def run(self):
         print("hello")
